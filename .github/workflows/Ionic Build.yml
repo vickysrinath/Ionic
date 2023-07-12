@@ -21,7 +21,10 @@ jobs:
           node-version: 14
 
       - name: Install project dependencies
-        run: npm ci
+        run: |
+          npm install -g @ionic/cli
+          npm ci
+          
 
       - name: Build Ionic project
         run: ionic build --prod
