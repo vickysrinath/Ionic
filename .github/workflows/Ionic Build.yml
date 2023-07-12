@@ -6,9 +6,6 @@ on:
       branch:
         description: 'The branch to build for'
         required: true
-        type: select
-        options: ${{ steps.get_branches.outputs.branches }}
-      
 
 jobs:
   build:
