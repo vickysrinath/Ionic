@@ -1,0 +1,41 @@
+name: CI/CD Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'The branch to build for'
+        required: true
+        type: select
+        options: ${{ steps.get_branches.outputs.branches }}
+      
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install project dependencies
+        run: npm ci
+
+      - name: Build Ionic project
+        run: ionic build --prod
+
+      - name: Commit build artifacts
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+
+          git add .
+          git commit -m "Committing build artifacts"
+          git push
+
+      # Add additional steps here, such as running tests or deploying the project
