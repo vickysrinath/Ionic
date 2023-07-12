@@ -1,0 +1,39 @@
+name: Ionic Build and Upload
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'The branch to build for'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3.7.0
+        with:
+          node-version: 16
+
+      - name: Install project dependencies
+        run: |
+          npm install -g @ionic/cli
+          npm ci
+
+      - name: Build Ionic project
+        run: ionic build --prod
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: AKIAZEDNY72XWKSB3HUT
+          aws-secret-access-key: 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
+          aws-region: ap-south-1
+
+      - name: Upload build artifacts to S3
+        run: aws s3 sync ./www  s3://gateway-mobile/gateway/ --acl private
