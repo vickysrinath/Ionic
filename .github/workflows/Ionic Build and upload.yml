@@ -32,7 +32,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: AKIAZEDNY72XWKSB3HUT
-          aws-secret-access-key: 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
+          aws-secret-access-key: 
           aws-region: ap-south-1
 
       - name: Upload build artifacts to S3
