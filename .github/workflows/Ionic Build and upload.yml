@@ -18,22 +18,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3.7.0
         with:
-          node-version: 16
+          node-version: 18
 
       - name: Install project dependencies
         run: |
-          npm install -g @ionic/cli
-          npm ci
+          npm install @angular/cli
 
       - name: Build Ionic project
         run: ionic build --prod
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: AKIAZEDNY72XWKSB3HUT
-          aws-secret-access-key: 
-          aws-region: ap-south-1
-
-      - name: Upload build artifacts to S3
-        run: aws s3 sync ./www  s3://gateway-mobile/gateway/ --acl private
+     
