@@ -24,4 +24,4 @@ jobs:
       - name: Upload build artifacts to S3
         run: aws s3 sync ./images  s3://gateway-mobile/gateway-temp/ --acl private
       - name: Rename gateway-temp to gateway
-        run: aws s3 mv s3://gateway-mobile/gateway-temp s3://gateway-mobile/gateway --recursive
+        run: aws s3 mv s3://gateway-mobile/gateway-temp/ s3://gateway-mobile/gateway/ --recursive
