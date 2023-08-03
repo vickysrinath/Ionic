@@ -22,4 +22,4 @@ jobs:
           aws-region: ap-south-1
 
       - name: Upload build artifacts to S3
-        run: aws s3 sync ./images  s3://gateway-mobile/gateway/ --acl private
+        run: aws s3 sync ./images  s3://gateway-mobile/gateway-temp/ --acl private
