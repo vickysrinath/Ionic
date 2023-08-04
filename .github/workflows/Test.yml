@@ -10,8 +10,8 @@ on:
         type: choice
         description: 'The environment to deploy to'
         options:
-        - dev
-        - uat
+        - DEV
+        - UAT
         - prod
         - sit
 
@@ -27,8 +27,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets[format('{0}_id', github.event.inputs.environment)] }}
-          aws-secret-access-key: ${{ secrets[format('{0}_key', github.event.inputs.environment)] }}
+          aws-access-key-id: ${{ secrets[format('{0}_ID', github.event.inputs.environment)] }}
+          aws-secret-access-key: ${{ secrets[format('{0}_KEY', github.event.inputs.environment)] }}
           aws-region: ap-south-1
 
       - name: Upload build artifacts to S3
