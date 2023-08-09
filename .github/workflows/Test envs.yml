@@ -27,7 +27,7 @@ jobs:
           env_values[UAT]="UAT_adawd"
           env_values[prod]="prod_value"
           env_values[sit]="sit_value"
-          echo "distribution=${env_values[${{ github.event.inputs.environment }}]}" >> $GITHUB_ENV
+        
       - name: Echo the distribution value
-        run: echo $distribution
+        run: echo ${env_values[${{ github.event.inputs.environment }}]}
       # The rest of your steps here...
