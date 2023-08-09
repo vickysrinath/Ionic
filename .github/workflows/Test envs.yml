@@ -1,0 +1,33 @@
+name: Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'The branch to build for'
+        required: true
+      environment:
+        type: choice
+        description: 'The environment to deploy to'
+        options:
+        - DEV
+        - UAT
+        - prod
+        - sit
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+      
+    steps:
+      - name: Set distribution variable based on environment
+        run: |
+          declare -A env_values
+          env_values[DEV]="dev_dawdaw"
+          env_values[UAT]="UAT_adawd"
+          env_values[prod]="prod_value"
+          env_values[sit]="sit_value"
+          echo "distribution=${env_values[${{ github.event.inputs.environment }}]}" >> $GITHUB_ENV
+      - name: Echo the distribution value
+        run: echo $distribution
+      # The rest of your steps here...
